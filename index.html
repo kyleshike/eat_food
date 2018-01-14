@@ -1,0 +1,82 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<style>
+		body {
+			background: black;
+			font-family: Helvetica;
+		}
+		#food-bg {
+			background: white;
+			position: absolute;
+			top: 5vh;
+			left: 0;
+			width: 100%;
+			min-width: 985px;
+			height: 90vh;
+			overflow: hidden;
+		}
+		#food-bg p {
+			color: black;
+			position: absolute;
+			font-weight: bold;
+			font-size: 45vh;
+			height: 45vh;
+			margin: 0;
+		}
+		#food-bg p:first-of-type {
+			top: 0;
+		}
+		#food-bg p:last-of-type {
+			bottom: 0;
+		}
+	</style>
+</head>
+<body>
+	<div id='food-bg'>
+		<p id='eat'>EAT</p>
+		<p id='food'>FOOD</p>
+	</div>
+
+	<script>
+		let eat, food, activeElement;
+
+		const init = () => {
+			eat = document.getElementById('eat');
+			food = document.getElementById('food');
+			activeElement = eat;
+			setTimeout(() => {
+				toggleLoop();
+			}, randomTime());
+		}
+
+		const toggleLoop = () => {
+			toggle();
+			activeElement = Math.random() > 0.5 ? food : eat;
+			setTimeout(() => {
+				toggleLoop();
+			}, randomTime());
+		}
+
+		const toggle = () => {
+			if(activeElement.style.visibility) {
+				activeElement.style.visibility = '';
+			} else {
+				activeElement.style.visibility = 'hidden';
+			}
+		}
+
+		const randomTime = () => {
+			let negModifier = Math.random() > 0.5 ? -1 : 1;
+			let modifier = Math.random() * 300 * negModifier;
+			return 500 + modifier;
+		}
+
+
+		init();
+	</script>
+</body>
+</html>
